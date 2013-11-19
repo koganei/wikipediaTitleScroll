@@ -1,5 +1,6 @@
 # Wikipedia Title Scroll
 
+Will change your tab title to reflect your current article heading while scrolling.
 Just a random one hour project to help me test my vanillaJS skills. uses requestAnimationFrame where available. To be installed as a userscript
 
 ## Installation
