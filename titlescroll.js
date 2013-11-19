@@ -100,7 +100,7 @@ var koganeiTitleScrollPlugin = function() {
     var changeTitle = function(newHeading) {
         var windowTitle = document.title;
         
-        if(_currentHeading != "") {
+        if(newHeading != "") {
             // save
             _currentHeading = newHeading;
             
