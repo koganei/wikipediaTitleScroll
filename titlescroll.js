@@ -7,8 +7,6 @@
 // @grant       none
 // ==/UserScript==
 
-console.log('WHAAAAAAAAAAAAAAAAAT!!!!!!!!!!!!!!!!!!!!!!');
-
 var koganeiTitleScrollPlugin = function() {
 
     /**
@@ -22,6 +20,18 @@ var koganeiTitleScrollPlugin = function() {
      * The current custom heading that we've added
      */
     var _currentHeading = "";
+
+    /**
+     *
+     * The spacer between the heading and the original title
+     */
+    var _spacer = " | ";
+
+    /**
+     *
+     * The original title. Assumes it doesn't change.
+     */
+    var _originalTitle = document.title;
     
     /**
      *
@@ -72,8 +82,6 @@ var koganeiTitleScrollPlugin = function() {
             
             var header = headers[i];
             
-            console.log(header, header.offsetTop);
-            
             // we search for the closest to the current _scrollY
             // I don't know if we can assume that they're in order,
             // to test
@@ -85,22 +93,22 @@ var koganeiTitleScrollPlugin = function() {
         }
         
         if(!closest.el) return "";
-        console.log(getText(closest.el));
+
         return getText(closest.el);
     };
     
     var changeTitle = function(newHeading) {
         var windowTitle = document.title;
-        var spacer = " | ";
         
-        // strip current heading
-        windowTitle = windowTitle.replace(_currentHeading + spacer, "");
-    
-        // save
-        _currentHeading = newHeading;
-        
-        // replace the title
-        document.title = newHeading + spacer + windowTitle;
+        if(_currentHeading != "") {
+            // save
+            _currentHeading = newHeading;
+            
+            // replace the title
+            document.title = newHeading + _spacer + _originalTitle;
+        } else {
+            document.title = _originalTitle;
+        }
     };
     
     
@@ -109,9 +117,7 @@ var koganeiTitleScrollPlugin = function() {
      * The global update function, gets called once every frame while scrolling
      */
     var update = function() {
-        var newHeading = getCurrentHeading();
-        
-        console.log(newHeading, " <- newHeading, currentHeading -> ", _currentHeading);
+        var newHeading = getCurrentHeading();    
 
         // skip the update if no change is to be done
         if(newHeading == _currentHeading) { return; }
