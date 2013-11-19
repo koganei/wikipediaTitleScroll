@@ -1,4 +1,7 @@
-Wikipedia Title Scroll
-======================
+# Wikipedia Title Scroll
 
 Just a random one hour project to help me test my vanillaJS skills. uses requestAnimationFrame where available. To be installed as a userscript
+
+## Installation
+
+http://userscripts.org/scripts/show/183549
